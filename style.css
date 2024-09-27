@@ -1,0 +1,335 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+body {
+  margin: 0;
+  height: 100dvh;
+  perspective: 460px;
+  perspective-origin: 50% 54%;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at -20% bottom,
+      #111, transparent 40%
+    ),
+    radial-gradient(
+      circle at 120% bottom,
+      #111, transparent 40%
+    ),
+    radial-gradient(
+      circle at top right,
+      #429, transparent
+    ),
+    radial-gradient(
+      circle at top left,
+      #a35 30%, #000
+    );
+}
+
+.floor {
+  width: 100dvw;
+  height: 2500dvh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transform:
+    translate(-50%, -50%)
+    rotateX(90deg)
+    translateZ(-52px);
+  background:
+    repeating-linear-gradient(
+      35deg,
+      transparent,
+      hotpink, pink 80px, 
+      transparent 120px,
+      transparent 200px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      violet,
+      #104a, #2068 40px,
+      rebeccapurple 80px,
+      violet 160px
+    );
+  background-size: 200% 200%;
+  animation: floor 70s linear infinite;
+}
+
+@keyframes floor {
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotateX(90deg)
+      translateZ(-52px)
+      translateY(13%);
+  }
+}
+
+.drink-milk {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% 120%;
+  width: 100%;
+  padding: 10dvmin;
+  font-size: 7dvmin;
+  text-align: center;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  letter-spacing: -.08em;
+  word-spacing: .05em;
+}
+
+.drink-milk .skate,
+.drink-milk .word {
+  position: absolute;
+  translate: -50% -50%;
+  color: #fff3;
+  padding: 1em;
+  background: radial-gradient(
+    circle at left center,
+    #ff0018,
+    #edff6e 50%
+  );
+  background-clip: text;
+  background-size: 200% 200%;
+}
+
+.drink-milk .word {
+  visibility: hidden;
+  text-align: center;
+}
+
+.drink-milk:hover .skate {
+  opacity: 0;
+}
+
+.drink-milk:hover .word {
+  animation: word 1.5s linear infinite;
+}
+
+:nth-child(1 of .drink-milk .word) {
+  animation-delay: 0;
+}
+
+:nth-child(2 of .drink-milk .word) {
+  animation-delay: .25s
+}
+
+:nth-child(3 of .drink-milk .word) {
+  animation-delay: .5s;
+}
+
+:nth-child(4 of .drink-milk .word) {
+  animation-delay: .75s;
+}
+
+:nth-child(5 of .drink-milk .word) {
+  animation-delay: 1s;
+}
+
+:nth-child(6 of .drink-milk .word) {
+  animation-delay: 1.25s;
+}
+
+@keyframes word {
+  from, 10%, 27%, to {
+    visibility: hidden;
+  }
+  20% {
+    visibility: visible;
+  }
+}
+
+.aircraft {
+  position: absolute;
+  width: 100%;
+  top: -10dvh;
+  opacity: 0;
+  filter:
+    saturate(4)
+    contrast(10)
+    blur(0)
+    hue-rotate(60deg);
+  transition: all 1s .5s;
+  transform: translateZ(0);
+}
+
+.drink-milk:hover ~ .aircraft {
+  opacity: 1;
+}
+
+.codepen-canvas {
+  --size: 25dvmin;
+  --final-opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -70%;
+  max-width: var(--size);
+  max-height: var(--size);
+  cursor: move;
+  opacity: 0;
+  background: radial-gradient(
+    circle at center 55%,
+    #000d 40%,
+    #0000 40%
+  );
+  border-radius: 50%;
+  animation:
+    fade-in
+      5s forwards;
+}
+
+.jigglypuff-canvas {
+  --size: 15dvmin;
+  position: absolute;
+  top: 40%;
+  left: -10%;
+  translate: -100% -100%;
+  max-width: var(--size);
+  max-height: var(--size);
+  cursor: move;
+  opacity: 0;
+  animation:
+    jigglypuff
+      15s cubic-bezier(.25,.46,.45,.94) infinite,
+    fade-in
+      5s forwards;
+}
+
+@keyframes jigglypuff {
+  to {
+    top: 15%;
+    left: calc(100% + var(--size));
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: var(--final-opacity, 1);
+  }
+}
+
+.parrot {
+  position: absolute;
+  top: 10%;
+  left: 110%;
+  animation: parrot 8s 6s infinite;
+}
+
+@keyframes parrot {
+  30%, to {
+    left: -30%;
+  }
+}
+
+.screen {
+  --shine-opacity: 0;
+  width: clamp(165px, 275px, 20dvw);
+  aspect-ratio: 4/3.5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  transition: all .5s;
+  background: url(https://assets.codepen.io/25387/noise.gif);
+}
+.screen::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: radial-gradient(
+    ellipse 90% 140% at 50% 100%,
+    transparent 60%,
+    #000f, transparent
+  );
+  rotate: .5turn;
+  opacity: var(--shine-opacity);
+  z-index: 1;
+}
+
+.screen::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15%;
+  background: radial-gradient(
+    ellipse 85% 130% at 50% 100%,
+    transparent 60%,
+    #f6c6, transparent
+  );
+  opacity: var(--shine-opacity);
+}
+
+iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 100%;
+  height: 100%;
+}
+
+svg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+:nth-child(1 of .screen) {
+  --shine-opacity: .5;
+  transform:
+    translate(-99.5%, 2.5%)
+    rotateY(45deg);
+}
+
+:nth-child(2 of .screen) {
+  --shine-opacity: 1;
+  transform:
+    translate(99.5%, 2.5%)
+    rotateY(-45deg);
+}
+
+.tv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(240px, 400px, 30%);
+  vertical-align: middle;
+  filter: hue-rotate(100deg) saturate(3);
+  transition: all .5s;
+  pointer-events: none;
+}
+:nth-child(1 of .tv) {
+  translate: -130% -50%;
+  transform-origin: left center;
+}
+:nth-child(2 of .tv) {
+  translate: 30% -50%;
+  rotate: y 180deg;
+}
+
+.lightning {
+  position: absolute;
+  top: 0;
+  right: 0;
+  translate: 20% -15%;
+}
+
+.lightning img {
+  width: 20dvmin;
+  rotate: 60deg;
+  opacity: .2;
+  scale: .6;
+}
+.lightning img:hover {
+  opacity: 1;
+}
